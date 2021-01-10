@@ -25,8 +25,9 @@ month = {may}
 This is a image recognition type convolutional neural netowrk (CNN). An instance of ResNet50 was used here. Any other compatible CNN can be used. The goal of this CNN is to learn hand shape patterns as shown below. The per frame learned representation will be used later in the sign recognition phase.
 
 ### Training 
-
+```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj subject03 --save_model```
 ### Evaluation
+```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj subject03 -rm test -tm <full_location_to_trained_model>```
 
 ## Network 2 : Recurrent Sign recognition network
 
