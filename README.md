@@ -49,6 +49,7 @@ Explanation of the options
 
 ## Network 2 : Recurrent Sign recognition network
 
+In this training, the input hand-patch videos are used to extract hand features using the trained model in the previous step. The all hand feature embeddings are first save into temporary direcotry and the sign recognition models are trained on those embeddings. Finally, the temporary directory is being cleaned.
 
 ### Training and Evaluation
 The lstm based sign recognition model will be trained and show maximum test accuracy on following commands,
