@@ -26,7 +26,12 @@ month = {may}
 * Two data direcotries are given as option ```-hdir``` and ```-dd``` 
 * These two option refer to the directory ```data_iters``` and ```cropped_handpatches``` respectively
 * The annotated hand patch download link: [annotated hand patch image download](https://drive.google.com/file/d/1BBwRGU8W17TK_eU_28y51c1Q-O7HqUmU/view?usp=sharing)
+  *   contains three subdirectories: iter0, iter1, iter2
+  *   each of the subdirectories contains 41 hand-shape class folders
+  *   each of these folders contains the hand-patch sample images
 * The cropped hand patch video link: [hand patch video download](https://drive.google.com/file/d/12mclaJTzQxkP7ZHfh9t7a3Btkf6YPAnf/view?usp=sharing)
+  *   for each ASL video in GMU-ASL51, this folder contains two videos: one for left hand cropped patch and other for right hand
+  *   an example hand video name is ```right_hand-wakeup_subject08_8_rgb```, meaning the sign video is from subject8 of sign class ```wakeup``` and for this video is for right hand
 
 ## Network 1 : Hand shape network
 This is a image recognition type convolutional neural netowrk (CNN). An instance of ResNet50 was used here. Any other compatible CNN can be used. The goal of this CNN is to learn hand shape patterns as shown below. The per frame learned representation will be used later in the sign recognition phase.
