@@ -24,10 +24,18 @@ month = {may}
 ## Network 1 : Hand shape network
 This is a image recognition type convolutional neural netowrk (CNN). An instance of ResNet50 was used here. Any other compatible CNN can be used. The goal of this CNN is to learn hand shape patterns as shown below. The per frame learned representation will be used later in the sign recognition phase.
 
+Explanation of the options
+
+* -hdir: directory of the hand shape obtained in each of the iterations (contains three iterations for our experiment)
+* --test_subj: the subject for which we ignore all the training hand shape image because, this is the test subject
+* --save_model: bool option, if specified, the script will save the trained cnn based on eval accuracy on test hand patches
+
 ### Training 
-* ```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj subject03 --save_model```
+* ```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj <subject identifier> --save_model```
+* **An example run:** ```python run_handshape_model.py -hdir data_iters/iter2/ -ts subject03```
 ### Evaluation
 * ```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj subject03 -rm test -tm <full_location_to_trained_model>```
+* **Example run:** ```python run_handshape_model.py -hdir  data_iters/iter2/ -ts subject03 -tm saves/handshape-model-subject03 -rm test```
 
 
 ## Network 2 : Recurrent Sign recognition network
@@ -36,6 +44,6 @@ This is a image recognition type convolutional neural netowrk (CNN). An instance
 ### Training and Evaluation
 The lstm based sign recognition model will be trained and show maximum test accuracy on following commands,
 * ```python run_lstm_sign_model.py -hcnn <saved_handshape_model_location> -dd <cropped_hand_video_direcotry> -bs <batch_size> -sr <sample_rate> -lr <learning_rate> -ts <test_subject> -ct <both hand vs single hand>```
-* An example run: ```python run_lstm_sign_model.py -hcnn saves/handshape-model-subject03 -dd ../prepare/cropped_handpatches/ -bs 8 -sr 20 -lr 0.0001 -ts subject03 -ct both_hand```
+* **An example run:** ```python run_lstm_sign_model.py -hcnn saves/handshape-model-subject03 -dd cropped_handpatches/ -bs 8 -sr 20 -lr 0.0001 -ts subject03 -ct both_hand```
 
 
