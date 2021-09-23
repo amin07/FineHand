@@ -32,22 +32,23 @@ parser.add_argument("--save_dir", "-sd", help="directory where models to be save
 parser.add_argument("--test_model", "-tm", help="model to be tested.",type=str, default='')
 parser.add_argument("--fusion_type", "-ft", help="type of fusion.",type=str, default='concat')
 parser.add_argument("--test_subj","-ts",  help="name or id of the test subject.",type=str, default=None)
-parser.add_argument("--data_dir", "-dd", help="location of input embeddings. default to original embd.",type=str, default='data_full/')
+parser.add_argument("--data_dir", "-dd", help="location of input embeddings. default to original embd.",type=str, default='cropped_handpatches/')
 parser.add_argument("--num_epochs","-ne",  help="number of epochs.",type=int, default=50)
 parser.add_argument("--batch_size","-bs",  help="size of each batch.",type=int, default=16)
 parser.add_argument("--learning_rate","-lr",  help="learning rate.",type=float, default=0.001)
-parser.add_argument("--pt_model","-pt",  help="pre trained sign model to be evaluated",type=str, default='')
 parser.add_argument("--save_model",  help="if specified model checkpoint will be saved during training", action='store_true')
 parser.add_argument("--verbose",  help="print logs", action='store_true')
 parser.add_argument("--gpu_id","-gpu",  help="gpu id.",type=int, default=0)
 parser.add_argument("--sample_rate","-sr",  help="sample rate.",type=int, default=10)
 parser.add_argument("--all_subs",  help="all subjects in the dataset",type=list, default=['subject{:02d}'.format(i) for i in range(1, 13)])
-parser.add_argument("--crop_type","-ct",  help="crop type of patches",type=str, default='')
+parser.add_argument("--crop_type","-ct",  help="crop type of patches",type=str, default='both_hand')
 parser.add_argument("--res_file","-resfile",  help="result file name",type=str, default='temp_res')
 parser.add_argument("--random_crop_size","-rcs",  help="random crop size data augmentation.",type=int, default=100)
 parser.add_argument("--model_name","-mn",  help="model name to be saved",type=str, default='')
-parser.add_argument("--freeze_embedder",  help="freeze embedder cnn model in case of sign rec", action='store_true')
 parser.add_argument("--hand_cnn","-hcnn",  help="cnn hand feature extractor.",type=str, required=True)
+parser.add_argument("--freeze_embedder",  help="freeze embedder cnn model in case of sign rec", action='store_true')
+
+#parser.add_argument("--pt_model","-pt",  help="pre trained sign model to be evaluated",type=str, default='')
 
 args = parser.parse_args()
 train_subs = [s for s in args.all_subs if s!=args.test_subj]
@@ -233,7 +234,7 @@ def train_model_on_embedding(input_loc):
         if not eval_only and phase == 'test' and epoch_acc > best_acc:
             print ('Best accuracy aquired!')
             best_acc = epoch_acc  
-        print('{} Loss: {:.4f} Acc: {:.4f} ## Max Acc so far: {:.4f}'.format(phase, epoch_loss, epoch_acc, best_acc))
+        print('{} Loss: {:.4f} Acc: {:.4f} ## Max Test Acc so far: {:.4f}'.format(phase, epoch_loss, epoch_acc, best_acc))
 
 
 '''
@@ -245,8 +246,6 @@ def write_embeddings(model):
   if args.freeze_embedder:
     print ('freezing everything')
     for name, param in model.named_parameters():
-      #print (name, param.size())
-      #if 'base_net' in name.split('.') and param.requires_grad:
         param.requires_grad=False
 
   tempdir = tempfile.TemporaryDirectory()    # chaingig args.embd_out to temp location

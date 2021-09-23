@@ -121,7 +121,7 @@ class RGBBothDataset(Dataset):
       vid_file_names = [f for f in vid_file_names if f.split('-')[0] == 'left_hand']
       
     print (vid_file_names[:5])
-    #vid_file_names = vid_file_names[:500]
+    vid_file_names = vid_file_names[:500]
     #random.shuffle(vid_file_names)
     self.transform = transform
     self.img_transform = img_transform

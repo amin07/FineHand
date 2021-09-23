@@ -10,13 +10,13 @@ dependencies:
   - scipy==1.4.1
   - Pillow==7.1.2
   - tensorboard==2.2.1
-  - sklearn==0.0
-  - scikit-image==0.18.3
-  - einops
   - pip:
+    - scikit-image==0.18.3
     - torch==1.4.0
     - torchvision==0.5.0
     - opencv_python==4.2.0.34
     - astropy==4.3.1
     - h5py==2.10.0
+    - einops
+    - sklearn==0.0
 
