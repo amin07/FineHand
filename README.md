@@ -33,6 +33,13 @@ month = {may}
   *   for each ASL video in GMU-ASL51, this folder contains two videos: one for left hand cropped patch and other for right hand
   *   an example hand video name is ```right_hand-wakeup_subject08_8_rgb```, meaning the sign video is from subject8 of sign class ```wakeup``` and for this video is for right hand
 
+## Set up running environment
+Run following commands after cloning the repo,
+```
+conda env create -f environments.yml
+conda activate finehand_env
+```
+
 ## Network 1 : Hand shape network
 This is a image recognition type convolutional neural netowrk (CNN). An instance of ResNet50 was used here. Any other compatible CNN can be used. The goal of this CNN is to learn hand shape patterns as shown below. The per frame learned representation will be used later in the sign recognition phase.
 
