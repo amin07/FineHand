@@ -21,6 +21,13 @@ address = {Los Alamitos, CA, USA},
 month = {may}
 }
 ```
+## Data Download
+* The running scripts below require two sets of data: annotated hand patch image for Network 1 and embedding from video hand patch for Network 2 <br>
+* Two data direcotries are given as option ```-hdir``` and ```-dd``` 
+* These two option refer to the directory ```data_iters``` and ```cropped_handpatches``` respectively
+* The annotated hand patch download link: [annotated hand patch image download](https://drive.google.com/file/d/1BBwRGU8W17TK_eU_28y51c1Q-O7HqUmU/view?usp=sharing)
+* The cropped hand patch video link: [hand patch video download](https://drive.google.com/file/d/12mclaJTzQxkP7ZHfh9t7a3Btkf6YPAnf/view?usp=sharing)
+
 ## Network 1 : Hand shape network
 This is a image recognition type convolutional neural netowrk (CNN). An instance of ResNet50 was used here. Any other compatible CNN can be used. The goal of this CNN is to learn hand shape patterns as shown below. The per frame learned representation will be used later in the sign recognition phase.
 
@@ -29,6 +36,8 @@ Explanation of the options
 * -hdir: directory of the hand shape obtained in each of the iterations (contains three iterations for our experiment)
 * --test_subj: the subject for which we ignore all the training hand shape image because, this is the test subject
 * --save_model: bool option, if specified, the script will save the trained cnn based on eval accuracy on test hand patches
+* -ct: train type using both hands or single hand options are [both_hand, left_hand, right_hand]
+* -lr: learning rate
 
 ### Training 
 * ```python run_handshape_model.py -hdir <hand_shape_image_directory>  --test_subj <subject identifier> --save_model```
