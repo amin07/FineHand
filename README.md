@@ -68,4 +68,6 @@ The lstm based sign recognition model will be trained and show maximum test accu
 * ```python run_lstm_sign_model.py -hcnn <saved_handshape_model_location> -dd <cropped_hand_video_direcotry> -bs <batch_size> -sr <sample_rate> -lr <learning_rate> -ts <test_subject> -ct <both hand vs single hand>```
 * **An example run:** ```python run_lstm_sign_model.py -hcnn saves/handshape-model-subject03 -dd cropped_handpatches/ -bs 8 -sr 20 -lr 0.0001 -ts subject03 -ct both_hand```
 
-
+## Contact
+website : https://amin07.github.io/<br>
+email : ahosain AT gmu DOT edu
